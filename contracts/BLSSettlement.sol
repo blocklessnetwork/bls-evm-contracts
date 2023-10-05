@@ -6,6 +6,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract BLSSettlement is Ownable {
     
+    constructor(address initialOwner) Ownable(initialOwner) {}
+
     mapping(address => bool) public authorizedContracts;
     
     event FundsTransferred(address from, address to, uint256 amount, address tokenAddress);

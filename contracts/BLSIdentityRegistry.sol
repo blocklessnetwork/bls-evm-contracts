@@ -4,6 +4,9 @@ pragma solidity ^0.8.18;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract BLSIdentityRegistry is Ownable {
+
+    constructor(address initialOwner) Ownable(initialOwner) {}
+
     // Struct to hold the public key and its associated signature
     struct KeySignaturePair {
         bytes pubKey;
