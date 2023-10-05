@@ -4,6 +4,21 @@ BLSSettlement is a suite of Ethereum smart contracts developed using Solidity an
 
 ## Contracts
 
+### BLSIdentityRegistry
+
+`BLSIdentityRegistry` is a contract that allows the owner to register, update, and delete key signature pairs and IPFS CIDs, which are associated with an identifier. This registry can be used to store public keys, their associated signatures, and IPFS CIDs for various uses within a decentralized application (dApp).
+
+## Functions
+
+### BLSIdentityRegistry
+
+- `registerKeySignaturePair(bytes memory identifier, bytes memory pubKey, bytes memory signature)`: Registers a new public key and signature pair associated with an identifier.
+- `registerIpfsCID(bytes memory identifier, string memory ipfsCID)`: Registers or updates the IPFS CID associated with an identifier.
+- `deleteKeySignaturePair(bytes memory identifier)`: Deletes a public key and signature pair using the identifier.
+- `updateKeySignaturePair(bytes memory identifier, bytes memory newPubKey, bytes memory newSignature)`: Updates an existing public key and signature pair.
+- `getKeySignaturePair(bytes memory identifier)`: Retrieves a public key and signature pair using the identifier.
+- `getIpfsCID(bytes memory identifier)`: Retrieves an IPFS CID using the identifier.
+
 ### BLSSettlement
 
 `BLSSettlement` is a contract responsible for handling settlements in both ETH and ERC20 tokens. The contract allows authorized contracts to initiate fund transfers and maintains the security and integrity of transactions.
