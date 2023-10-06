@@ -5,7 +5,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract BLSIdentityRegistry is Ownable {
 
-    constructor(address initialOwner) Ownable(initialOwner) {}
+    constructor(address initialOwner) Ownable(initialOwner) {
+        require(initialOwner != address(0), "BLSIdentityRegistry: initial owner is the zero address");
+    }
 
     // Struct to hold the public key and its associated signature
     struct KeySignaturePair {

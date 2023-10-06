@@ -6,7 +6,9 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract BLSSettlement is Ownable {
     
-    constructor(address initialOwner) Ownable(initialOwner) {}
+    constructor(address initialOwner) Ownable(initialOwner) {
+        require(initialOwner != address(0), "BLSSettlement: initial owner is the zero address");
+    }
 
     mapping(address => bool) public authorizedContracts;
     

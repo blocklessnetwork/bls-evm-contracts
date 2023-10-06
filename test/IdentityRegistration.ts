@@ -9,18 +9,15 @@ describe("BLSIdentityRegistry", function () {
     BLSIdentityRegistry = await ethers.getContractFactory(
       "BLSIdentityRegistry"
     );
-    blsIdentityRegistry = await BLSIdentityRegistry.deploy();
-    await blsIdentityRegistry.deployed();
+    const [owner] = await ethers.getSigners();
+    blsIdentityRegistry = await BLSIdentityRegistry.deploy(owner.address);
   });
 
   it("should register the key-signature pair", async function () {
-    const identifier = ethers.utils.hexlify(
-      ethers.utils.toUtf8Bytes("identifier")
-    );
-    const pubKey = ethers.utils.hexlify(ethers.utils.toUtf8Bytes("publicKey"));
-    const signature = ethers.utils.hexlify(
-      ethers.utils.toUtf8Bytes("signature")
-    );
+    const identifier = ethers.hexlify(ethers.toUtf8Bytes("identifier"));
+
+    const pubKey = "0x" + "00".repeat(48); // 96 hex characters, 48 bytes
+    const signature = "0x" + "00".repeat(96); // 192 hex characters, 96 bytes
 
     await blsIdentityRegistry.registerKeySignaturePair(
       identifier,
@@ -36,10 +33,8 @@ describe("BLSIdentityRegistry", function () {
   });
 
   it("should register and retrieve the IPFS CID", async function () {
-    const identifier = ethers.utils.hexlify(
-      ethers.utils.toUtf8Bytes("identifier")
-    );
-    const ipfsCID = "QmXnnyufdzAWL5CqZ2RnSNgPbvCc1ALT73s6epPrRnZ1Xy"; // Example IPFS CID
+    const identifier = ethers.hexlify(ethers.toUtf8Bytes("identifier"));
+    const ipfsCID = "QmXnnyufdzAWL5CqZ2RnSNgPbvCc1ALT73s6epPrRnZ1Xy";
 
     await blsIdentityRegistry.registerIpfsCID(identifier, ipfsCID);
     const returnedIpfsCID = await blsIdentityRegistry.getIpfsCID(identifier);
