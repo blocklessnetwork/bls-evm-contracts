@@ -20,7 +20,8 @@ describe("BLSSettlement", function () {
 
     [owner, addr1, addr2, ...addrs] = await hardhat.ethers.getSigners();
 
-    bls = await BLS.deploy(owner.address);
+    bls = await BLS.deploy();
+    bls.initialize(owner.address);
     mockERC20 = await MOCKERC20.deploy("MockToken", "MKT");
     mockCaller = await MOCKCALLER.deploy(bls.target);
   });

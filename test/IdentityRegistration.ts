@@ -10,7 +10,8 @@ describe("BLSIdentityRegistry", function () {
       "BLSIdentityRegistry"
     );
     const [owner] = await ethers.getSigners();
-    blsIdentityRegistry = await BLSIdentityRegistry.deploy(owner.address);
+    blsIdentityRegistry = await BLSIdentityRegistry.deploy();
+    blsIdentityRegistry.initialize(owner.address);
   });
 
   it("should register the key-signature pair", async function () {
