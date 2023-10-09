@@ -6,7 +6,7 @@ import "./BLSSettlement.sol";  // Ensure path is correct
 contract MockCaller {
     BLSSettlement public blsSettlement;
     
-    constructor(address _blsSettlement) {
+    constructor(address payable _blsSettlement) {
         blsSettlement = BLSSettlement(_blsSettlement);
     }
 

@@ -15,7 +15,8 @@ contract BLSSettlement is Ownable {
     event FundsTransferred(address from, address to, uint256 amount, address tokenAddress);
     event ContractAuthorized(address contractAddress);
     event ContractDeauthorized(address contractAddress);
-    
+    event Received(address, uint256);
+
     modifier onlyAuthorizedContracts() {
         require(authorizedContracts[msg.sender], "Not authorized");
         _;
@@ -56,5 +57,9 @@ contract BLSSettlement is Ownable {
     function withdrawAccidentalToken(address token) external onlyOwner {
         uint256 balance = IERC20(token).balanceOf(address(this));
         IERC20(token).transfer(owner(), balance);
+    }
+    
+    receive() external payable {
+        emit Received(msg.sender, msg.value);
     }
 }
